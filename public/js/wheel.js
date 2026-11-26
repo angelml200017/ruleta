@@ -16,7 +16,7 @@ function easeOutQuint(t) {
 }
 
 function colorForIndex(i, n) {
-  // Si n es impar, el último sector se pinta del verde clásico de la ruleta
+  // Si n es impar, último sector se pinta del verde clásico de la ruleta
   // (como el 0/00) para romper la simetría sin dos rojos adyacentes
   if (n % 2 === 1 && i === n - 1) return CASINO_GREEN;
   return i % 2 === 0 ? CASINO_RED : CASINO_BLACK;
