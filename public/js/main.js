@@ -1,5 +1,4 @@
 import { Wheel } from './wheel.js';
-import { initSourceViewer } from './sourceViewer.js';
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -239,7 +238,6 @@ function init() {
   setupLights();
   setupSoundHooks();
   setupChat();
-  initSourceViewer();
 
   $('#add-form').addEventListener('submit', onAdd);
   $('#duration-input').addEventListener('input', onDurationChange);

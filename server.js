@@ -7,10 +7,6 @@ import { handlePoker } from './poker-room.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, 'public');
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
-// Ficheros del backend (fuera de public/) que se exponen en solo lectura
-// para el visor de "código fuente" didáctico. Lista cerrada a propósito:
-// nunca se sirve una ruta arbitraria fuera de public/.
-const ROOT_SOURCE_FILES = new Set(['server.js', 'poker-room.js']);
 // En producción (Render, Fly, Railway, etc.) hay que bindear a 0.0.0.0 para
 // que el proxy de la plataforma pueda alcanzar el puerto. En local mantenemos
 // 127.0.0.1 para no exponer la app al resto de la red por defecto.
@@ -59,12 +55,6 @@ const server = http.createServer(async (req, res) => {
 
     let rel = decodeURIComponent(url.pathname);
     if (rel === '/') rel = '/index.html';
-
-    // Visor de código fuente: permite leer server.js/poker-room.js desde
-    // el navegador aunque vivan fuera de public/ (solo lectura, allowlist).
-    if (req.method === 'GET' && ROOT_SOURCE_FILES.has(rel.slice(1))) {
-      if (await tryServeFile(path.join(__dirname, rel.slice(1)), res)) return;
-    }
 
     // Resolver y prevenir path traversal. OJO: hay que comparar con el
     // separador al final para no permitir hermanos como "publicBackup".

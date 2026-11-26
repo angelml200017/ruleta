@@ -1,5 +1,3 @@
-import { initSourceViewer } from './sourceViewer.js';
-
 const $ = (sel) => document.querySelector(sel);
 const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -210,7 +208,6 @@ function init() {
     $('#chat-form').addEventListener('submit', onChatSubmit);
     $('#legend-btn').addEventListener('click', onToggleLegend);
     $('#back-link').addEventListener('click', onBackToRoulette);
-    initSourceViewer();
 
     if (state.token) connect();
     render();
