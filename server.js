@@ -11,7 +11,7 @@ const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 // que el proxy de la plataforma pueda alcanzar el puerto. En local mantenemos
 // 127.0.0.1 para no exponer la app al resto de la red por defecto.
 const IS_PROD =
-    process.env.NODE_ENV === 'production' || !!process.env.RENDER;
+  process.env.NODE_ENV === 'production' || !!process.env.RENDER;
 const HOST = process.env.HOST || (IS_PROD ? '0.0.0.0' : '127.0.0.1');
 
 const MIME = {
@@ -60,8 +60,8 @@ const server = http.createServer(async (req, res) => {
     // separador al final para no permitir hermanos como "publicBackup".
     const resolved = path.normalize(path.join(publicDir, rel));
     if (
-        resolved !== publicDir &&
-        !resolved.startsWith(publicDir + path.sep)
+      resolved !== publicDir &&
+      !resolved.startsWith(publicDir + path.sep)
     ) {
       send(res, 403, 'Forbidden');
       return;
@@ -83,7 +83,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, HOST, () => {
   const displayHost =
-      HOST === '0.0.0.0' || HOST === '::' ? 'localhost' : HOST;
+    HOST === '0.0.0.0' || HOST === '::' ? 'localhost' : HOST;
   console.log('\n  La Ruleta de la Integración');
   console.log(`  → http://${displayHost}:${PORT}`);
   if (HOST === '127.0.0.1' || HOST === '::1') {

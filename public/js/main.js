@@ -206,7 +206,7 @@ const audio = {
     this.resume();
     const notes = [523.25, 659.25, 783.99, 1046.5];
     notes.forEach((f, i) =>
-        this._tone(f, { type: 'triangle', dur: 0.25, vol: 0.13 }, i * 0.1),
+      this._tone(f, { type: 'triangle', dur: 0.25, vol: 0.13 }, i * 0.1),
     );
   },
   jackpot() {
@@ -214,7 +214,7 @@ const audio = {
     this.resume();
     const notes = [523.25, 659.25, 783.99, 1046.5, 1318.51, 1567.98, 2093, 2637];
     notes.forEach((f, i) =>
-        this._tone(f, { type: 'triangle', dur: 0.28, vol: 0.15 }, i * 0.09),
+      this._tone(f, { type: 'triangle', dur: 0.28, vol: 0.15 }, i * 0.09),
     );
     // Bombo grave para darle cuerpo
     this._tone(130, { type: 'square', dur: 0.5, vol: 0.18, attack: 0.02 }, 0);
@@ -326,12 +326,12 @@ function setupChat() {
     const count = isJackpot ? 5 : 2 + Math.floor(Math.random() * 2);
     for (let i = 0; i < count; i++) {
       setTimeout(
-          () =>
-              addMessage(pickRandom(pool), {
-                reaction: true,
-                big: isJackpot,
-              }),
-          250 + i * 400 + Math.random() * 200,
+        () =>
+          addMessage(pickRandom(pool), {
+            reaction: true,
+            big: isJackpot,
+          }),
+        250 + i * 400 + Math.random() * 200,
       );
     }
   };
@@ -342,14 +342,14 @@ function setupSoundHooks() {
   document.addEventListener('pointerdown', () => audio.init(), { once: true });
   // Click sonido en botones/checkboxes/labels (delegación global)
   document.addEventListener(
-      'mousedown',
-      (e) => {
-        const el = e.target.closest(
-            'button, input[type="checkbox"], .config-row.toggle span',
-        );
-        if (el && !el.disabled) audio.click();
-      },
-      { capture: true },
+    'mousedown',
+    (e) => {
+      const el = e.target.closest(
+        'button, input[type="checkbox"], .config-row.toggle span',
+      );
+      if (el && !el.disabled) audio.click();
+    },
+    { capture: true },
   );
 }
 
@@ -380,7 +380,7 @@ function onAdd(event) {
     return;
   }
   const exists = state.participants.some(
-      (p) => p.toLowerCase() === name.toLowerCase(),
+    (p) => p.toLowerCase() === name.toLowerCase(),
   );
   if (exists) {
     err.textContent = 'Ya hay un participante con ese nombre.';
@@ -433,8 +433,8 @@ async function onSpin() {
     };
 
     const { index, name } = await state.wheel.spin(
-        state.config.spinDurationMs,
-        { onTick },
+      state.config.spinDurationMs,
+      { onTick },
     );
 
     // Detectar "casi ganador": el puntero cae cerca de un borde de sector
@@ -443,11 +443,11 @@ async function onSpin() {
       const sectorAngle = (Math.PI * 2) / n;
       const POINTER = (3 * Math.PI) / 2;
       const pointerInWheel =
-          (((POINTER - state.wheel.rotation) % (Math.PI * 2)) + Math.PI * 2) %
-          (Math.PI * 2);
+        (((POINTER - state.wheel.rotation) % (Math.PI * 2)) + Math.PI * 2) %
+        (Math.PI * 2);
       const pos = pointerInWheel % sectorAngle;
       const nearMiss =
-          pos < sectorAngle * 0.08 || pos > sectorAngle * 0.92;
+        pos < sectorAngle * 0.08 || pos > sectorAngle * 0.92;
       if (nearMiss) {
         const pointerEl = document.querySelector('.pointer');
         pointerEl.classList.remove('wobble');
@@ -473,8 +473,8 @@ async function onSpin() {
     const shakeClass = isJackpot ? 'shake-hard' : 'shake';
     document.body.classList.add(shakeClass);
     setTimeout(
-        () => document.body.classList.remove(shakeClass),
-        isJackpot ? 700 : 400,
+      () => document.body.classList.remove(shakeClass),
+      isJackpot ? 700 : 400,
     );
 
     if (isJackpot) audio.jackpot();
@@ -506,7 +506,7 @@ function onReset() {
   if (state.wheel.isSpinning) return;
   if (state.participants.length === 0 && state.winners.length === 0) return;
   const ok = window.confirm(
-      '¿Reiniciar todo? Se perderán los participantes y los ganadores actuales.',
+    '¿Reiniciar todo? Se perderán los participantes y los ganadores actuales.',
   );
   if (!ok) return;
   state.participants = [];
@@ -529,10 +529,10 @@ function setControlsDisabled(disabled) {
   $('#reset-btn').disabled = disabled;
   $('#spin-btn').disabled = disabled || state.participants.length < 1;
   document
-      .querySelectorAll('.participants-list .remove-btn')
-      .forEach((btn) => {
-        btn.disabled = disabled;
-      });
+    .querySelectorAll('.participants-list .remove-btn')
+    .forEach((btn) => {
+      btn.disabled = disabled;
+    });
 }
 
 function renderAll() {
@@ -540,7 +540,7 @@ function renderAll() {
   renderWinners();
   state.wheel.setParticipants(state.participants);
   $('#spin-btn').disabled =
-      state.wheel.isSpinning || state.participants.length < 1;
+    state.wheel.isSpinning || state.participants.length < 1;
 }
 
 function renderParticipants() {
