@@ -2,6 +2,7 @@ import http from 'node:http';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { handlePoker } from './poker-room.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, 'public');
@@ -50,6 +51,8 @@ async function tryServeFile(filePath, res) {
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host}`);
+    if (await handlePoker(req, res, url)) return;
+
     let rel = decodeURIComponent(url.pathname);
     if (rel === '/') rel = '/index.html';
 

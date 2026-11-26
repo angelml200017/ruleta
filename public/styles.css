@@ -30,8 +30,8 @@ body {
     Arial, sans-serif;
   color: var(--text);
   background:
-    radial-gradient(ellipse at top, rgba(196, 30, 58, 0.18) 0%, transparent 60%),
-    radial-gradient(circle at center, #1a4d2e 0%, #0d2d1c 55%, #050f0a 100%);
+          radial-gradient(ellipse at top, rgba(196, 30, 58, 0.18) 0%, transparent 60%),
+          radial-gradient(circle at center, #1a4d2e 0%, #0d2d1c 55%, #050f0a 100%);
   min-height: 100vh;
 }
 
@@ -47,8 +47,8 @@ body {
   font-size: clamp(1.6rem, 2.6vw, 2.3rem);
   letter-spacing: 0.02em;
   text-shadow:
-    0 0 14px rgba(255, 215, 0, 0.55),
-    0 2px 6px rgba(0, 0, 0, 0.7);
+          0 0 14px rgba(255, 215, 0, 0.55),
+          0 2px 6px rgba(0, 0, 0, 0.7);
 }
 
 .subtitle {
@@ -57,6 +57,22 @@ body {
   font-size: 0.95rem;
   font-style: italic;
   opacity: 0.9;
+}
+
+.header-nav {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-nav {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.app-header .btn-ghost {
+  color: var(--casino-gold-light);
+  border-color: rgba(212, 175, 55, 0.6);
 }
 
 .layout {
@@ -244,19 +260,19 @@ body {
   border: 1px solid var(--casino-gold-dark);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-    0 4px 10px rgba(0, 0, 0, 0.35),
-    0 0 14px rgba(255, 215, 0, 0.35);
+          inset 0 1px 0 rgba(255, 255, 255, 0.45),
+          inset 0 -2px 0 rgba(0, 0, 0, 0.15),
+          0 4px 10px rgba(0, 0, 0, 0.35),
+          0 0 14px rgba(255, 215, 0, 0.35);
 }
 
 .btn-primary:hover:not(:disabled) {
   background: linear-gradient(180deg, #ffe076 0%, #d8b132 60%, #a88624 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-    0 6px 14px rgba(0, 0, 0, 0.4),
-    0 0 22px rgba(255, 215, 0, 0.55);
+          inset 0 1px 0 rgba(255, 255, 255, 0.55),
+          inset 0 -2px 0 rgba(0, 0, 0, 0.15),
+          0 6px 14px rgba(0, 0, 0, 0.4),
+          0 0 22px rgba(255, 215, 0, 0.55);
 }
 
 .btn-lg {
@@ -292,18 +308,18 @@ body {
 @keyframes spinReady {
   0%, 100% {
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.45),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-      0 4px 10px rgba(0, 0, 0, 0.35),
-      0 0 14px rgba(255, 215, 0, 0.35);
+            inset 0 1px 0 rgba(255, 255, 255, 0.45),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.15),
+            0 4px 10px rgba(0, 0, 0, 0.35),
+            0 0 14px rgba(255, 215, 0, 0.35);
     transform: translateY(0);
   }
   50% {
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.55),
-      inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-      0 7px 16px rgba(0, 0, 0, 0.45),
-      0 0 30px rgba(255, 215, 0, 0.85);
+            inset 0 1px 0 rgba(255, 255, 255, 0.55),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.15),
+            0 7px 16px rgba(0, 0, 0, 0.45),
+            0 0 30px rgba(255, 215, 0, 0.85);
     transform: translateY(-2px);
   }
 }
@@ -353,9 +369,9 @@ body {
   border-radius: 50%;
   background: #ffd700;
   box-shadow:
-    0 0 6px #ffd700,
-    0 0 14px rgba(255, 215, 0, 0.85),
-    inset 0 1px 2px rgba(255, 255, 255, 0.55);
+          0 0 6px #ffd700,
+          0 0 14px rgba(255, 215, 0, 0.85),
+          inset 0 1px 2px rgba(255, 255, 255, 0.55);
   animation: lightBlink 1.1s infinite ease-in-out;
   will-change: opacity, background;
 }
@@ -369,9 +385,9 @@ body {
     opacity: 1;
     background: #ffd700;
     box-shadow:
-      0 0 6px #ffd700,
-      0 0 14px rgba(255, 215, 0, 0.85),
-      inset 0 1px 2px rgba(255, 255, 255, 0.55);
+            0 0 6px #ffd700,
+            0 0 14px rgba(255, 215, 0, 0.85),
+            inset 0 1px 2px rgba(255, 255, 255, 0.55);
   }
   50% {
     opacity: 0.2;
@@ -392,8 +408,8 @@ body {
   border-right: 20px solid transparent;
   border-top: 34px solid var(--casino-gold-light);
   filter:
-    drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6))
-    drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
+          drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6))
+          drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
   z-index: 3;
 }
 
@@ -435,18 +451,18 @@ body {
 /* Variante JACKPOT: gradiente que cambia + borde oro pulsante + escala mayor */
 .winner-banner.jackpot {
   background: linear-gradient(
-    90deg,
-    rgba(196, 30, 58, 0.55) 0%,
-    rgba(212, 175, 55, 0.55) 50%,
-    rgba(14, 110, 58, 0.55) 100%
+          90deg,
+          rgba(196, 30, 58, 0.55) 0%,
+          rgba(212, 175, 55, 0.55) 50%,
+          rgba(14, 110, 58, 0.55) 100%
   );
   background-size: 200% 100%;
   border-width: 2px;
   border-color: var(--casino-gold-light);
   font-size: 1.3rem;
   box-shadow:
-    0 0 24px rgba(255, 215, 0, 0.8),
-    0 0 48px rgba(196, 30, 58, 0.4);
+          0 0 24px rgba(255, 215, 0, 0.8),
+          0 0 48px rgba(196, 30, 58, 0.4);
   animation: celebrateJackpot 0.7s ease-out, jackpotSlide 2s linear infinite;
 }
 
@@ -521,9 +537,9 @@ body {
   border-radius: 6px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    0 2px 6px rgba(0, 0, 0, 0.45),
-    0 0 14px rgba(255, 215, 0, 0.55);
+          inset 0 1px 0 rgba(255, 255, 255, 0.5),
+          0 2px 6px rgba(0, 0, 0, 0.45),
+          0 0 14px rgba(255, 215, 0, 0.55);
   letter-spacing: 0.02em;
 }
 
@@ -538,15 +554,15 @@ body {
 @keyframes prizePulse {
   from {
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      0 2px 6px rgba(0, 0, 0, 0.45),
-      0 0 14px rgba(255, 215, 0, 0.55);
+            inset 0 1px 0 rgba(255, 255, 255, 0.5),
+            0 2px 6px rgba(0, 0, 0, 0.45),
+            0 0 14px rgba(255, 215, 0, 0.55);
   }
   to {
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.6),
-      0 4px 10px rgba(0, 0, 0, 0.5),
-      0 0 34px rgba(255, 215, 0, 1);
+            inset 0 1px 0 rgba(255, 255, 255, 0.6),
+            0 4px 10px rgba(0, 0, 0, 0.5),
+            0 0 34px rgba(255, 215, 0, 1);
   }
 }
 
@@ -562,8 +578,8 @@ body {
 /* En modo jackpot la lluvia es más densa y cae desde arriba con más brillo */
 .money-shower.intense .money-bill {
   filter:
-    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.55))
-    drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
 }
 
 /* Screen shake al ganar: sacudida breve de todo el body */
@@ -662,8 +678,8 @@ body.shake-hard {
   border: 2px solid var(--casino-gold-dark);
   border-radius: 12px;
   box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.65),
-    0 0 0 1px rgba(212, 175, 55, 0.2);
+          0 12px 32px rgba(0, 0, 0, 0.65),
+          0 0 0 1px rgba(212, 175, 55, 0.2);
   backdrop-filter: blur(8px);
   overflow: hidden;
   z-index: 900;
@@ -682,9 +698,9 @@ body.shake-hard {
   gap: 8px;
   padding: 10px 12px;
   background: linear-gradient(
-    180deg,
-    rgba(196, 30, 58, 0.95),
-    rgba(139, 20, 41, 0.95)
+          180deg,
+          rgba(196, 30, 58, 0.95),
+          rgba(139, 20, 41, 0.95)
   );
   color: #fff;
   font-weight: 700;

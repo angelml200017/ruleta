@@ -1,102 +1,105 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>La Ruleta de la Integración</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='28' fill='%236366f1'/><circle cx='32' cy='32' r='6' fill='white'/></svg>" />
-  </head>
-  <body>
-    <header class="app-header">
-      <h1>La Ruleta de la Integración</h1>
-      <p class="subtitle">Añade participantes, gira y deja que la suerte decida.</p>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La Ruleta de la Integración</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='28' fill='%236366f1'/><circle cx='32' cy='32' r='6' fill='white'/></svg>" />
+</head>
+<body>
+<header class="app-header">
+  <h1>La Ruleta de la Integración</h1>
+  <p class="subtitle">Añade participantes, gira y deja que la suerte decida.</p>
+  <nav class="header-nav">
+    <a href="/poker.html" class="btn btn-primary btn-nav">Planning Poker</a>
+  </nav>
+</header>
 
-    <main class="layout">
-      <!-- Panel izquierdo: participantes + configuración -->
-      <section class="panel" aria-label="Participantes y configuración">
-        <h2>Participantes</h2>
+<main class="layout">
+  <!-- Panel izquierdo: participantes + configuración -->
+  <section class="panel" aria-label="Participantes y configuración">
+    <h2>Participantes</h2>
 
-        <form id="add-form" class="add-form" autocomplete="off">
-          <input
-            id="participant-input"
-            type="text"
-            placeholder="Nombre del participante"
-            maxlength="40"
-            required
-          />
-          <button type="submit" class="btn btn-primary">Añadir</button>
-        </form>
-        <p id="add-error" class="error-msg" role="alert" aria-live="polite"></p>
+    <form id="add-form" class="add-form" autocomplete="off">
+      <input
+              id="participant-input"
+              type="text"
+              placeholder="Nombre del participante"
+              maxlength="40"
+              required
+      />
+      <button type="submit" class="btn btn-primary">Añadir</button>
+    </form>
+    <p id="add-error" class="error-msg" role="alert" aria-live="polite"></p>
 
-        <ul id="participants-list" class="participants-list" aria-live="polite"></ul>
+    <ul id="participants-list" class="participants-list" aria-live="polite"></ul>
 
-        <h2>Configuración</h2>
-        <div class="config">
-          <label class="config-row">
-            <span>Duración del giro (s)</span>
-            <input
-              id="duration-input"
-              type="number"
-              min="1"
-              max="15"
-              step="1"
-              value="5"
-            />
-          </label>
-          <label class="config-row toggle">
-            <input id="remove-winner-toggle" type="checkbox" checked />
-            <span>Eliminar ganador de la ruleta</span>
-          </label>
-        </div>
+    <h2>Configuración</h2>
+    <div class="config">
+      <label class="config-row">
+        <span>Duración del giro (s)</span>
+        <input
+                id="duration-input"
+                type="number"
+                min="1"
+                max="15"
+                step="1"
+                value="5"
+        />
+      </label>
+      <label class="config-row toggle">
+        <input id="remove-winner-toggle" type="checkbox" checked />
+        <span>Eliminar ganador de la ruleta</span>
+      </label>
+    </div>
 
-        <div class="actions">
-          <button id="spin-btn" class="btn btn-primary btn-lg" disabled>Girar</button>
-          <button id="reset-btn" class="btn btn-ghost">Reiniciar todo</button>
-        </div>
-      </section>
+    <div class="actions">
+      <button id="spin-btn" class="btn btn-primary btn-lg" disabled>Girar</button>
+      <button id="reset-btn" class="btn btn-ghost">Reiniciar todo</button>
+    </div>
+  </section>
 
-      <!-- Centro: ruleta -->
-      <section class="wheel-area" aria-label="Ruleta">
-        <div class="wheel-wrapper">
-          <div class="lights-ring" aria-hidden="true"></div>
-          <div class="pointer" aria-hidden="true"></div>
-          <canvas id="wheel" width="520" height="520"></canvas>
-        </div>
-        <div id="winner-banner" class="winner-banner" aria-live="polite"></div>
-      </section>
+  <!-- Centro: ruleta -->
+  <section class="wheel-area" aria-label="Ruleta">
+    <div class="wheel-wrapper">
+      <div class="lights-ring" aria-hidden="true"></div>
+      <div class="pointer" aria-hidden="true"></div>
+      <canvas id="wheel" width="520" height="520"></canvas>
+    </div>
+    <div id="winner-banner" class="winner-banner" aria-live="polite"></div>
+  </section>
 
-      <!-- Panel derecho: ganadores -->
-      <section class="panel" aria-label="Ganadores">
-        <h2>Ganadores</h2>
-        <ol id="winners-list" class="winners-list" aria-live="polite"></ol>
-        <p id="winners-empty" class="muted">Aún no hay ganadores.</p>
-      </section>
-    </main>
+  <!-- Panel derecho: ganadores -->
+  <section class="panel" aria-label="Ganadores">
+    <h2>Ganadores</h2>
+    <ol id="winners-list" class="winners-list" aria-live="polite"></ol>
+    <p id="winners-empty" class="muted">Aún no hay ganadores.</p>
+  </section>
+</main>
 
-    <aside class="chat-widget" aria-label="Chat en vivo">
-      <header class="chat-header">
-        <span class="chat-live-dot" aria-hidden="true"></span>
-        <span class="chat-title">Chat en vivo</span>
-        <span class="chat-viewers" aria-hidden="true">1.247</span>
-        <button
-          class="chat-toggle"
-          type="button"
-          aria-label="Minimizar chat"
-          aria-expanded="true"
-        >
-          −
-        </button>
-      </header>
-      <div
-        id="chat-messages"
-        class="chat-messages"
-        role="log"
-        aria-live="polite"
-      ></div>
-    </aside>
+<aside class="chat-widget" aria-label="Chat en vivo">
+  <header class="chat-header">
+    <span class="chat-live-dot" aria-hidden="true"></span>
+    <span class="chat-title">Chat en vivo</span>
+    <span class="chat-viewers" aria-hidden="true">1.247</span>
+    <button
+            class="chat-toggle"
+            type="button"
+            aria-label="Minimizar chat"
+            aria-expanded="true"
+    >
+      −
+    </button>
+  </header>
+  <div
+          id="chat-messages"
+          class="chat-messages"
+          role="log"
+          aria-live="polite"
+  ></div>
+</aside>
 
-    <script type="module" src="/js/main.js"></script>
-  </body>
+<script type="module" src="/js/main.js"></script>
+</body>
 </html>
