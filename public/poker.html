@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Planning Poker de la Integración</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/poker.css" />
+    <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='14' y='6' width='36' height='52' rx='6' fill='%23c41e3a' stroke='%23d4af37' stroke-width='4'/></svg>" />
+</head>
+<body>
+<header class="app-header">
+    <h1>Planning Poker de la Integración</h1>
+    <p class="subtitle">Elige tu carta, guárdala boca abajo y que hable la mesa.</p>
+    <nav id="back-nav" class="header-nav" hidden>
+        <a id="back-link" href="/" class="btn btn-ghost btn-nav">Volver a la ruleta</a>
+    </nav>
+    <nav class="header-nav">
+        <button id="source-btn" type="button" class="btn btn-ghost btn-nav">Código fuente</button>
+    </nav>
+</header>
+
+<dialog id="source-modal" class="source-modal" aria-label="Código fuente del proyecto">
+    <div class="source-modal-inner">
+        <header class="source-modal-header">
+            <h2>Código fuente (fines didácticos)</h2>
+            <button id="source-close-btn" type="button" class="btn btn-ghost btn-sm" aria-label="Cerrar">✕</button>
+        </header>
+        <div class="source-modal-body">
+            <nav id="source-file-list" class="source-file-list" aria-label="Ficheros del proyecto"></nav>
+            <div class="source-code-panel">
+                <p id="source-file-path" class="source-file-path"></p>
+                <pre class="source-pre"><code id="source-code"></code></pre>
+            </div>
+        </div>
+    </div>
+</dialog>
+
+<main class="poker-layout">
+    <!-- Pantalla de entrada -->
+    <section id="join-screen" class="panel join-panel" aria-label="Entrar a la sala">
+        <h2>Entrar a la sala</h2>
+        <form id="join-form" class="add-form" autocomplete="off">
+            <input
+                    id="join-name"
+                    type="text"
+                    placeholder="Tu nombre"
+                    maxlength="30"
+                    required
+            />
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+        <p id="join-error" class="error-msg" role="alert" aria-live="polite"></p>
+        <p class="muted">Quien entra primero a la sala es el moderador.</p>
+    </section>
+
+    <!-- Fin de sesión (participantes) -->
+    <section id="end-screen" class="panel join-panel end-panel" aria-label="Sesión finalizada" hidden>
+        <h2>Sesión finalizada</h2>
+        <p id="end-message" class="end-message" role="status"></p>
+        <p class="muted">Gracias por participar. Ya puedes cerrar esta pestaña.</p>
+    </section>
+
+    <!-- Sala -->
+    <section id="room" class="poker-room" hidden>
+        <aside class="panel" aria-label="Participantes">
+            <h2>Participantes (<span id="participants-count">0</span>)</h2>
+            <ul id="poker-participants" class="participants-list poker-participants" aria-live="polite"></ul>
+            <div class="actions">
+                <button id="invite-btn" type="button" class="btn btn-primary" hidden>Copiar enlace de invitación</button>
+                <p id="invite-hint" class="muted" hidden></p>
+                <button id="leave-btn" type="button" class="btn btn-ghost">Salir de la sala</button>
+            </div>
+        </aside>
+
+        <section class="poker-center" aria-label="Mesa">
+            <div class="poker-table">
+                <p id="phase-status" class="phase-status" aria-live="polite"></p>
+
+                <div id="voting-timer" class="voting-timer" role="timer" hidden>
+                    <span id="voting-timer-label" class="voting-timer-label"></span>
+                    <span id="voting-timer-value" class="voting-timer-value">00:00</span>
+                </div>
+
+                <div id="task-display" class="task-display" hidden>
+                    <span class="task-label">Tarea</span>
+                    <a id="task-link" target="_blank" rel="noopener noreferrer"></a>
+                </div>
+
+                <div id="table-cards" class="table-cards" aria-live="polite"></div>
+                <div id="consensus-banner" class="winner-banner celebrate consensus-banner" aria-live="polite" hidden></div>
+
+                <div id="moderator-controls" class="moderator-controls">
+                    <button id="start-btn" type="button" class="btn btn-primary btn-lg" hidden>Comenzar</button>
+                    <form id="task-form" class="add-form task-form" autocomplete="off" hidden>
+                        <input
+                                id="task-input"
+                                type="url"
+                                placeholder="https://jira.ejemplo.com/browse/PROJ-123"
+                                maxlength="500"
+                                required
+                        />
+                        <button id="task-submit" type="submit" class="btn btn-primary">Puntuar</button>
+                    </form>
+                    <div class="vote-actions">
+                        <button id="reveal-btn" type="button" class="btn btn-primary btn-lg" hidden>Revelar</button>
+                        <button id="revote-btn" type="button" class="btn btn-ghost btn-on-felt" hidden>Repetir votación</button>
+                    </div>
+                </div>
+                <p id="room-error" class="error-msg on-felt" role="alert" aria-live="polite"></p>
+            </div>
+
+            <div id="reaction-bar" class="reaction-bar" role="group" aria-label="Reacciones"></div>
+
+            <div id="hand-area" class="hand-area" hidden>
+                <div class="hand-header">
+                    <h2 class="hand-title">Tu baraja</h2>
+                    <button
+                            id="legend-btn"
+                            type="button"
+                            class="btn btn-ghost btn-sm"
+                            aria-expanded="false"
+                            aria-controls="card-legend"
+                    >
+                        Valor por carta
+                    </button>
+                </div>
+                <dl id="card-legend" class="card-legend" hidden></dl>
+                <div id="hand" class="hand" role="group" aria-label="Cartas para votar"></div>
+            </div>
+        </section>
+    </section>
+
+    <aside class="chat-widget chat-docked" aria-label="Chat de la sala">
+        <header class="chat-header">
+            <span class="chat-live-dot" aria-hidden="true"></span>
+            <span class="chat-title">Chat de la sala</span>
+            <span class="chat-viewers" aria-hidden="true">0</span>
+            <button
+                    class="chat-toggle"
+                    type="button"
+                    aria-label="Minimizar chat"
+                    aria-expanded="true"
+            >
+                −
+            </button>
+        </header>
+        <div
+                id="chat-messages"
+                class="chat-messages"
+                role="log"
+                aria-live="polite"
+        ></div>
+        <form id="chat-form" class="chat-form" autocomplete="off">
+            <input
+                    id="chat-input"
+                    type="text"
+                    placeholder="Entra en la sala para escribir"
+                    maxlength="300"
+                    disabled
+            />
+            <button type="submit" class="btn btn-primary" disabled>Enviar</button>
+        </form>
+    </aside>
+</main>
+
+<script type="module" src="/js/poker.js"></script>
+</body>
+</html>

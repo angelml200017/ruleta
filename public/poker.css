@@ -1,0 +1,574 @@
+/* === Planning Poker: reutiliza la paleta y componentes de styles.css === */
+
+[hidden] {
+    display: none !important;
+}
+
+.poker-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.poker-room {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .poker-layout,
+    .poker-room {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Fondo más rojizo que la ruleta para diferenciar la sala */
+html,
+body {
+    background:
+            radial-gradient(ellipse at top, rgba(255, 90, 90, 0.22) 0%, transparent 60%),
+            radial-gradient(circle at center, #7a1626 0%, #4a0d18 55%, #1a0408 100%);
+    background-attachment: fixed;
+}
+
+.join-panel {
+    max-width: 460px;
+    width: 100%;
+    justify-self: center;
+}
+
+.end-message {
+    margin: 0 0 8px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+/* Chat integrado en el layout (en vez de flotante) */
+.chat-widget.chat-docked {
+    position: sticky;
+    top: 16px;
+    bottom: auto;
+    right: auto;
+    width: auto;
+    max-width: none;
+    height: 560px;
+    z-index: 1;
+}
+
+.chat-widget.chat-docked.collapsed {
+    height: 44px;
+}
+
+@media (max-width: 1100px) {
+    .chat-widget.chat-docked {
+        position: static;
+        height: 380px;
+    }
+}
+
+.chat-form {
+    flex-shrink: 0;
+    display: flex;
+    gap: 6px;
+    padding: 8px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.chat-widget.collapsed .chat-form {
+    display: none;
+}
+
+.chat-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 8px;
+    background: rgba(255, 253, 244, 0.08);
+    color: #f4ecd2;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.chat-form input:focus {
+    border-color: var(--casino-gold);
+}
+
+.chat-form .btn {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+}
+
+.chat-msg.real {
+    padding: 3px 6px;
+    margin: 0 -6px;
+    border-radius: 6px;
+    background: rgba(212, 175, 55, 0.12);
+    border-left: 2px solid var(--casino-gold);
+}
+
+.chat-msg.system {
+    color: var(--casino-gold-light);
+    font-style: italic;
+    font-size: 0.78rem;
+    text-align: center;
+    opacity: 0.9;
+    word-break: break-all;
+}
+
+.btn-on-felt {
+    color: var(--casino-gold-light);
+    border-color: rgba(212, 175, 55, 0.6);
+}
+
+/* Participantes */
+.poker-participants li {
+    gap: 4px 8px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.poker-participants li.offline {
+    opacity: 0.5;
+}
+
+.participant-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.participant-name {
+    flex: 1 1 auto;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: var(--casino-red);
+    color: #fff;
+}
+
+.participant-status {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.participant-status.voted {
+    color: var(--casino-green);
+    font-weight: 700;
+}
+
+.participant-status.value {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--casino-red);
+}
+
+/* Mesa de juego (tapete) */
+.poker-center {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.poker-table {
+    min-height: 360px;
+    padding: 24px;
+    border-radius: 140px / 90px;
+    background:
+            radial-gradient(ellipse at center, #237a49 0%, #1a4d2e 60%, #10351f 100%);
+    border: 10px solid #5a3a1a;
+    box-shadow:
+            inset 0 0 0 3px var(--casino-gold),
+            inset 0 0 40px rgba(0, 0, 0, 0.55),
+            var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+}
+
+.phase-status {
+    margin: 0;
+    color: #e8d89a;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.voting-timer {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+.voting-timer-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--casino-gold);
+}
+
+.voting-timer-value {
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #e8d89a;
+}
+
+.voting-timer.running .voting-timer-value {
+    color: var(--casino-gold-light);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.55);
+}
+
+.task-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+.task-label {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--casino-gold);
+}
+
+.task-display a {
+    color: #fff;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task-display a:hover {
+    color: var(--casino-gold-light);
+}
+
+.table-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.seat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 72px;
+}
+
+.seat-name {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #f4ecd2;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.moderator-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.task-form {
+    width: min(520px, 100%);
+}
+
+.task-form input[type='url'] {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid rgba(139, 105, 20, 0.4);
+    border-radius: 8px;
+    background: #fffdf4;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.task-form input[type='url']:focus {
+    border-color: var(--casino-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+.vote-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#reveal-btn.ready {
+    animation: spinReady 1.6s ease-in-out infinite;
+}
+
+.error-msg.on-felt {
+    margin: 0;
+    color: #ffb3b3;
+}
+
+/* Cartas */
+.poker-card {
+    position: relative;
+    width: 56px;
+    height: 80px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    user-select: none;
+}
+
+.poker-card.empty {
+    border: 2px dashed rgba(232, 216, 154, 0.45);
+}
+
+.poker-card.back {
+    background:
+            repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.12) 0 4px, transparent 4px 10px),
+            linear-gradient(160deg, var(--casino-red) 0%, var(--casino-red-dark) 100%);
+    border: 2px solid var(--casino-gold);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.poker-card.face {
+    background: linear-gradient(180deg, #fffdf4 0%, #f3e8c6 100%);
+    color: var(--casino-red);
+    border: 2px solid var(--casino-gold);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.poker-card.face::before,
+.poker-card.face::after {
+    content: attr(data-value);
+    position: absolute;
+    font-size: 0.6rem;
+}
+
+.poker-card.face::before {
+    top: 4px;
+    left: 6px;
+}
+
+.poker-card.face::after {
+    bottom: 4px;
+    right: 6px;
+    transform: rotate(180deg);
+}
+
+.poker-card.flip {
+    animation: cardFlip 0.5s ease-out both;
+}
+
+@keyframes cardFlip {
+    from { transform: perspective(400px) rotateY(90deg); }
+    to { transform: perspective(400px) rotateY(0deg); }
+}
+
+.consensus-banner {
+    justify-content: center;
+    letter-spacing: 0.04em;
+}
+
+/* Reacciones */
+.reaction-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.reaction-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    background: rgba(8, 18, 12, 0.7);
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.reaction-btn:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 0 14px rgba(255, 215, 0, 0.55);
+}
+
+.reaction-btn:active {
+    transform: scale(0.92);
+}
+
+.reaction-float {
+    position: fixed;
+    z-index: 1001;
+    font-size: 2.2rem;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+    animation-name: reactionFloat;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes reactionFloat {
+    0% {
+        transform: translate(-50%, 0) scale(0.4);
+        opacity: 0;
+    }
+    15% {
+        transform: translate(-50%, -24px) scale(1.2);
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(-50% + var(--drift, 0px)), -110px) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Leyenda "Valor por carta" */
+.hand-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.hand-header .hand-title {
+    margin: 0;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.card-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px 14px;
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #fffdf4;
+    border: 1px solid rgba(139, 105, 20, 0.35);
+    font-size: 0.85rem;
+}
+
+.card-legend div {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.card-legend dt {
+    min-width: 26px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: 700;
+    color: var(--casino-red);
+    text-align: right;
+}
+
+.card-legend dd {
+    margin: 0;
+    color: var(--text);
+}
+
+/* Baraja del jugador */
+.hand-area {
+    background: var(--panel);
+    border: 2px solid var(--casino-gold);
+    border-radius: var(--radius);
+    padding: 14px 18px 18px;
+    box-shadow: var(--shadow);
+}
+
+.hand-title {
+    margin: 0 0 12px;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--casino-red);
+}
+
+.hand {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.hand .poker-card {
+    width: 58px;
+    height: 84px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.hand .poker-card:hover:not(:disabled) {
+    transform: translateY(-6px);
+}
+
+.hand .poker-card.selected {
+    transform: translateY(-14px);
+    background: linear-gradient(180deg, #ffe076 0%, #d8b132 100%);
+    color: #2a1a05;
+    box-shadow:
+            0 8px 16px rgba(0, 0, 0, 0.4),
+            0 0 18px rgba(255, 215, 0, 0.8);
+}
+
+.hand .poker-card:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
